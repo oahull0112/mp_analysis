@@ -168,7 +168,7 @@ class MP_Climber(Climber):
                 if len(current_line)==14:
                     if count>0:
                         temp_send_data = pd.DataFrame([current_line], columns=columns)
-                        send_data = send_data.append(temp_send_data)
+                        send_data = pd.concat([send_data, temp_send_data])
             count=count+1
         send_data, null_data = self.add_send_difficulty(send_data)
         

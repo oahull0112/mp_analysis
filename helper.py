@@ -9,6 +9,7 @@ import urllib.request as url_request
 from urllib.error import HTTPError
 from bs4 import BeautifulSoup
 from http.client import IncompleteRead
+import pandas as pd
 
 def is_climb_url(site):
     if 'href=' in site:
@@ -25,6 +26,9 @@ def is_climb_url(site):
             return False
         except IncompleteRead:
             return False
+        except:
+            print("An error occured")
+            return False
     else:
         return False
 
@@ -32,5 +36,5 @@ def append_dataframes(big_df, small_df):
     if big_df.empty:
         big_df = small_df.copy()
     else:
-        big_df = big_df.append(small_df)
+        big_df = pd.concat([big_df, small_df])
     return big_df
